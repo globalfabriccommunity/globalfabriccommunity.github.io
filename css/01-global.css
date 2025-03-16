@@ -529,8 +529,8 @@ img {
     font-weight: 600;
     text-transform: capitalize;
     padding: 11px 30px 11px;
-    border-radius: 8px;
-    background: linear-gradient(211deg, #8F79FF 13.4%, #426BFF 118.74%);
+    border-radius: 100px;
+    background: linear-gradient(211deg, #2cf267 13.4%, #006c72 118.74%);
     box-shadow: 0px 20px 24px -10px #0B042F;
     background-size: 200% auto;
     font-family: var(--thm-font-two);
