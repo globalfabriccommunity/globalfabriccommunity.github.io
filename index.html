@@ -4,19 +4,23 @@
 <head>
 	<meta charset="utf-8">
 	<title>Global Fabric Community</title>
-
-	<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap"
-		rel="stylesheet">
-
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-		rel="stylesheet">
-
+	<link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css"
+		type="text/css" />
+	<script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>
 	<!--Color Switcher Mockup-->
 	<link href="css/color-switcher-design.css" rel="stylesheet">
 	<!-- Color Themes -->
 	<link id="theme-color-file" href="css/color-themes/green-color.css" rel="stylesheet">
 	<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 	<link rel="icon" href="images/favicon.png" type="image/x-icon">
+
+	    <!-- Azure Maps CSS -->
+		<link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css" />
+		<!-- Papa Parse -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+		<!-- Azure Maps JS -->
+		<script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>
+		
 	<!-- Responsive -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -24,15 +28,16 @@
 	<!-- Stylesheets -->
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
-	<link href="css/responsive.css" rel="stylesheet">                                                     
-	
-	<meta property="og:title" content="Global Fabric Community">                      
-	<meta property="og:description" content="Be part of the largest Microsoft Fabric community and organize Fabric events">          
-	<meta property="og:image" content="images/GFC-Black.png">                
+	<link href="css/responsive.css" rel="stylesheet">
+
+	<meta property="og:title" content="Global Fabric Community">
+	<meta property="og:description"
+		content="Be part of the largest Microsoft Fabric community and organize Fabric events">
+	<meta property="og:image" content="images/GFC-Black.png">
 	<meta name="description" content="Be part of the largest Microsoft Fabric community and organize Fabric events">
 </head>
 
-<body class="body-bg-color">
+<body class="body-bg-color" onload="GetMap();">
 
 	<div class="page-wrapper">
 
@@ -41,589 +46,426 @@
 		<!-- End Preloader -->
 
 
-<div class="container">
-				    <style>
-        /* Styling for the top bar */
-        .top-bar {
-            background-color: #147864; /* Deep blue background */
-            color: white; /* White text for contrast */
-            text-align: center;
-            padding: 10px 20px;
-            position: absolute; /* Keeps the bar at the top */
-            width: 100%;
-            top: 0px;
-            left: 0;
-            z-index: 0; /* Ensures the bar stays on top of other content */
-            font-family: Arial, sans-serif; /* Simple and readable font */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Subtle shadow for depth */
-        }
+		<div class="container">
+			<style>
+				/* Styling for the top bar */
+				.top-bar {
+					background-color: #147864;
+					/* Deep blue background */
+					color: white;
+					/* White text for contrast */
+					text-align: center;
+					padding: 10px 20px;
+					position: absolute;
+					/* Keeps the bar at the top */
+					width: 100%;
+					top: 0px;
+					left: 0;
+					z-index: 0;
+					/* Ensures the bar stays on top of other content */
+					font-family: Arial, sans-serif;
+					/* Simple and readable font */
+					box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+					/* Subtle shadow for depth */
+				}
 
-        /* Adding padding to the body to avoid overlap with the top bar */
-        body {
-            margin-top: 0px; 
-			
-        }
-    </style>
+				/* Adding padding to the body to avoid overlap with the top bar */
+				body {
+					margin-top: 0px;
 
- <div class="top-bar" align="center">
-        This website is under continuous improvement, expect regular updates.
-</div>
+				}
+			</style>
 
-		<!-- Main Header -->
-		<header class="main-header main-header-one">
+			<div class="top-bar" align="center">
+				This website is under continuous improvement, expect regular updates.
+			</div>
 
-			<!-- Header Lower -->
-			<div class="header-lower">
+			<!-- Main Header -->
+			<header class="main-header main-header-one">
 
-				<div class="main-menu__wrapper">
-					<div class="inner-container d-flex align-items-center justify-content-between">
+				<!-- Header Lower -->
+				<div class="header-lower">
 
-						<!-- Logo Box -->
-						<div class="main-header-one__logo-box">
-							<a href="index.html"><img src="images/GFC.svg" style="height: 100px;" alt="" z-index = 1;></a>
+					<div class="main-menu__wrapper">
+						<div class="inner-container d-flex align-items-center justify-content-between">
+
+							<!-- Logo Box -->
+							<div class="main-header-one__logo-box">
+								<a href="index.html"><img src="images/GFC.svg" style="height: 100px;" alt=""
+										z-index=1;></a>
+							</div>
+
+							<div class="nav-outer">
+
+								<!-- Main Menu -->
+								<nav class="main-menu show navbar-expand-md">
+
+
+								</nav>
+								<!-- Main Menu End-->
+
+							</div>
+
+							<!-- Outer Box -->
+							<div class="outer-box d-flex align-items-center">
+
+								<ul class="main-header__login-sing-up">
+
+									<li><a href="https://forms.office.com/r/XsVPrep2w4" target="_blank">Join the
+											Community</a></li>
+								</ul>
+
+								<!-- Mobile Navigation Toggler -->
+
+
+							</div>
+							<!-- End Outer Box -->
+
 						</div>
-
-						<div class="nav-outer">
-
-							<!-- Main Menu -->
-							<nav class="main-menu show navbar-expand-md">
-								
-
-							</nav>
-							<!-- Main Menu End-->
-
-						</div>
-
-						<!-- Outer Box -->
-						<div class="outer-box d-flex align-items-center">
-
-							<ul class="main-header__login-sing-up">
-								
-								<li><a href="https://forms.office.com/r/XsVPrep2w4" target="_blank">Join the Community</a></li>
-							</ul>
-
-							<!-- Mobile Navigation Toggler -->
-							
-
-						</div>
-						<!-- End Outer Box -->
 
 					</div>
-
 				</div>
-			</div>
-			<!-- End Header Lower -->
+				<!-- End Header Lower -->
 
-			<!-- Mobile Menu  -->
-			<div class="mobile-menu">
-				<div class="menu-backdrop"></div>
-				
-				<nav class="menu-box">
-					<div class="nav-logo"><a href="index.html"><img src="images/logo-2.png" alt="" title=""></a></div>
-					<!-- Search -->
-					
-					<div class="menu-outer">
-						<!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
-					</div>
-				</nav>
-			</div>
-			<!-- End Mobile Menu -->
-		</header>
-		<!-- End Main Header -->
-			
-<!-- Feature One Start -->
-		<section class="feature-one">
-			<div class="container">
-				<div class="feature-one__inner">
-					<h2 class="feature-one__title">Be part of the<br> Global Fabric community<br> and organize Fabric events<br>
-						 <span>around the world</span> </h2>
-					<div class="feature-one__btn-box">
-						<a href="https://forms.office.com/r/XsVPrep2w4" target="_blank" class="thm-btn feature-one__btn"> <i class="fal fa-plus"></i> Join the Community</a>
-					</div>
+				<!-- Mobile Menu  -->
+				<div class="mobile-menu">
+					<div class="menu-backdrop"></div>
+
+					<nav class="menu-box">
+						<div class="nav-logo"><a href="index.html"><img src="images/logo-2.png" alt="" title=""></a>
+						</div>
+						<!-- Search -->
+
+						<div class="menu-outer">
+							<!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+						</div>
+					</nav>
+				</div>
+				<!-- End Mobile Menu -->
+			</header>
+			<!-- End Main Header -->
+
+			<!-- Feature One Start -->
+			<section class="feature-one">
+				<div class="container">
+					<div class="feature-one__inner">
+						<h2 class="feature-one__title">Be part of the<br> Global Fabric community<br> and organize
+							Fabric events<br>
+							<span>around the world</span>
+						</h2>
+						<div class="feature-one__btn-box">
+							<a href="https://forms.office.com/r/XsVPrep2w4" target="_blank"
+								class="thm-btn feature-one__btn"> <i class="fal fa-plus"></i> Join the Community</a>
+						</div>
 						<!-- Solutions One Start -->
-		<section class="solutions-one">
-			<div class="container">
-				<div class="section-title text-center">
-					<div class="section-title__tagline-box">
-						<h2 class="feature-one__title">What's <span>Next</span></h2>
+						<section class="solutions-one">
+							<div class="container">
+								<div class="section-title text-center">
+									<div class="section-title__tagline-box">
+										<h2 class="feature-one__title">What's <span>Next</span></h2>
+									</div>
+									<p>We are delighted to welcome<br>
+									<div class="main-header-one__logo-box"><a
+											href="https://www.linkedin.com/in/kimmanis/" target="_blank"><img
+												src="images/Kim_Manis.png" height="150px" alt=""></a></div>
+									<a href="https://www.linkedin.com/in/kimmanis/" style="color:white"
+										target="_blank"></b>Kim Manis</a>, Corporate Vice President of Product for
+									Microsoft Fabric & Power BI,<br>to Toronto for the official launch of the inaugural
+									</br>
+									<b style="color:white;">Global Fabric Community Day Conference.</b></p>
+									<p></p><br>Organized by local Fabric user groups worldwide, this landmark event will
+									take place on <a style="color:white"><strong>May 31st, 2025 </a></strong> or <a
+										style="color:white"><strong>June 1st, 2025</a></strong> </br>based on the choice
+									of the local user group.
+
+									<p><br>User group leaders, don’t miss this unique opportunity to be part of the
+										first-ever Global Fabric Community Day. </br><br></br></p>
+									<div class="section-title__tagline-box">
+										<h2 class="feature-one__title">Join us <span>in making history!</span></h2>
+									</div>
+								</div>
+
+
+								<div class="feature-one__btn-box">
+
+
+
+
+									<p>&nbsp;</p>
+								</div>
+								<div class="feature-one__main-content-box">
+									<div class="feature-one__color-overly-1 flaot-bob-y"></div>
+									<div class="feature-one__color-overly-2 flaot-bob-x"></div>
+									<div class="feature-one__color-overly-3 img-bounce"></div>
+									<div class="feature-one__main-content-top">
+
+										<li>
+											<div class="container" align="center">
+
+												<div class="feature-one__single">
+													<div class="feature-one__icon">
+														<img src="images/data_factory.png" style="height:60px" alt="">
+													</div>
+
+												</div>
+											</div>
+										</li>
+										<ul class="feature-one__list">
+											<li>
+												<div class="feature-one__single">
+													<div class="feature-one__icon">
+														<img src="images/power_bi.png" style="height:60px" alt="">
+													</div>
+
+												</div>
+											</li>
+											<li>
+												<div class="feature-one__single">
+													<div class="feature-one__icon">
+														<img src="images/data-engineering-icon.svg" style="height:60px"
+															alt="">
+													</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+									<div class="feature-one__main-content-middle">
+										<div class="feature-one__start-1 zoominout">
+											<img src="images/shapes/feature-one-star-1.png" alt="">
+										</div>
+										<div class="feature-one__start-2 float-bob-x">
+											<img src="images/shapes/feature-one-star-2.png" alt="">
+										</div>
+										<div class="feature-one__start-3 float-bob-y">
+											<img src="images/shapes/feature-one-star-3.png" alt="">
+										</div>
+
+										<div class="feature-one__start-5 zoominout">
+											<img src="images/shapes/feature-one-star-5.png" alt="">
+										</div>
+										<div class="feature-one__start-6 float-bob-x">
+											<img src="images/shapes/feature-one-star-6.png" alt="">
+										</div>
+										<div class="feature-one__start-7 float-bob-y">
+											<img src="images/shapes/feature-one-star-7.png" alt="">
+										</div>
+
+
+										<ul class="feature-one__list">
+											<li>
+												<div class="feature-one__single">
+													<div class="feature-one__icon">
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="feature-one__cpu-icon-box">
+													<img src="images/icons/fabric.svg" alt="">
+												</div>
+											</li>
+											<li>
+												<div class="feature-one__single">
+													<div class="feature-one__icon">
+
+													</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+									<div class="feature-one__main-content-bottom">
+										<div class="feature-one__start-4 zoominout">
+											<img src="images/shapes/feature-one-star-4.png" alt="">
+										</div>
+										<div class="feature-one__start-8 float-bob-x">
+											<img src="images/shapes/feature-one-star-8.png" alt="">
+										</div>
+										<ul class="feature-one__list">
+											<li>
+												<div class="feature-one__single">
+													<div class="feature-one__icon">
+														<img src="images/synapse_data_science.png" style="height:60px"
+															alt="">
+													</div>
+												</div>
+											</li>
+											<li>
+
+											</li>
+											<div class="feature-one__single">
+												<div class="feature-one__icon">
+													<img src="images/synapse_data_warehouse.png" style="height:60px"
+														alt="">
+												</div>
+											</div>
+										</ul>
+										<li>
+											<div class="container" align="center">
+
+												<div class="feature-one__single">
+													<div class="feature-one__icon">
+														<img src="images/real-time-intelligence-icon.svg"
+															style="height:60px" alt="">
+													</div>
+												</div>
+											</div>
+										</li>
+									</div>
+								</div>
+							</div>
+						</section>
+						<!-- Feature One End -->
+						<!-- [START maps_add_map] -->
+						<!-- Azzure Map  Start -->
+						<section>
+							<div class="container">
+								<div class="section-title text-center">
+									<div class="section-title__tagline-box">
+										<h2 class="feature-one__title">Global <span>Fabric Community</span></h2>
+										<p>Joined Local Fabric Communities</p>
+									</div>
+								</div>
+							</div>
+						</section>
 					</div>
-					<p>We are delighted to welcome<br>
-						<div class="main-header-one__logo-box"><a href="https://www.linkedin.com/in/kimmanis/" target="_blank"><img src="images/Kim_Manis.png" height="150px" alt=""></a></div>
-					<a href="https://www.linkedin.com/in/kimmanis/" style="color:white" target="_blank"></b>Kim Manis</a>, Corporate Vice President of Product for Microsoft Fabric & Power BI,<br>to Toronto for the official launch of the inaugural </br>
-			<b style="color:white;">Global Fabric Community Day Conference.</b></p>
- <p></p><br>Organized by local Fabric user groups worldwide, this landmark event will take place on <a style="color:white"><strong>May 31st, 2025 </a></strong> or <a style="color:white"><strong>June 1st, 2025</a></strong> </br>based on the choice of the local user group.
+					<style>
+						/* Set the size of the map */
+						#map {
+							height: 400px;
+							width: 100%;
+							border: 10px;
+							border-radius: 10px;
+						}
+					</style>
+					<script>
+						var map;
 				
-				  <p><br>User group leaders, don’t miss this unique opportunity to be part of the first-ever Global Fabric Community Day. </br><br></br></p>
-		<div class="section-title__tagline-box">
-						<h2 class="feature-one__title">Join us <span>in making history!</span></h2>
-					</div>
-                </div>
-					
-					
-					<div class="feature-one__btn-box">
-						
-						
-						
-						
-						  <p>&nbsp;</p>
-					</div>
-					<div class="feature-one__main-content-box">
-						<div class="feature-one__color-overly-1 flaot-bob-y"></div>
-						<div class="feature-one__color-overly-2 flaot-bob-x"></div>
-						<div class="feature-one__color-overly-3 img-bounce"></div>
-						<div class="feature-one__main-content-top">
-							
-								<li>
-							<div class="container" align="center">
-					
-								<div class="feature-one__single">
-										<div class="feature-one__icon">
-											<img src="images/data_factory.png" style="height:60px" alt="">
-										</div>
-										
-							  </div>
-							</div>
-							</li>
-							<ul class="feature-one__list">
-								<li>
-									<div class="feature-one__single">
-										<div class="feature-one__icon">
-											<img src="images/Data-Activator.png" style="height:60px" alt="">
-										</div>
-										
-									</div>
-								</li>
-								<li>
-									<div class="feature-one__single">
-										<div class="feature-one__icon">
-											<img src="images/onelake.png" style="height:60px" alt="">
-										</div>
-									</div>
-								</li>
-							</ul>
-						</div>
-						<div class="feature-one__main-content-middle">
-							<div class="feature-one__start-1 zoominout">
-								<img src="images/shapes/feature-one-star-1.png" alt="">
-							</div>
-							<div class="feature-one__start-2 float-bob-x">
-								<img src="images/shapes/feature-one-star-2.png" alt="">
-							</div>
-							<div class="feature-one__start-3 float-bob-y">
-								<img src="images/shapes/feature-one-star-3.png" alt="">
-							</div>
-
-							<div class="feature-one__start-5 zoominout">
-								<img src="images/shapes/feature-one-star-5.png" alt="">
-							</div>
-							<div class="feature-one__start-6 float-bob-x">
-								<img src="images/shapes/feature-one-star-6.png" alt="">
-							</div>
-							<div class="feature-one__start-7 float-bob-y">
-								<img src="images/shapes/feature-one-star-7.png" alt="">
-							</div>
-
-							
-							<ul class="feature-one__list">
-								<li>
-									<div class="feature-one__single">
-										<div class="feature-one__icon">
-											<img src="images/power_bi.png" style="height:60px" alt="">
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="feature-one__cpu-icon-box">
-										<img src="images/icons/fabric.svg" alt="">
-									</div>
-								</li>
-								<li>
-									<div class="feature-one__single">
-										<div class="feature-one__icon">
-											<img src="images/synapse_data_engineering.png" style="height:60px" alt="">
-										</div>
-									</div>
-								</li>
-							</ul>
-						</div>
-						<div class="feature-one__main-content-bottom">
-							<div class="feature-one__start-4 zoominout">
-								<img src="images/shapes/feature-one-star-4.png" alt="">
-							</div>
-							<div class="feature-one__start-8 float-bob-x">
-								<img src="images/shapes/feature-one-star-8.png" alt="">
-							</div>
-							<ul class="feature-one__list">
-								<li>
-									<div class="feature-one__single">
-										<div class="feature-one__icon">
-											<img src="images/synapse_data_science.png" style="height:60px" alt="">
-										</div>
-									</div>
-								</li>
-								<li>
-									
-								</li>
-									<div class="feature-one__single">
-										<div class="feature-one__icon">
-											<img src="images/synapse_data_warehouse.png" style="height:60px" alt="">
-										</div>
-									</div>
-							</ul>
-						<li>
-							<div class="container" align="center">
-					
-								<div class="feature-one__single">
-										<div class="feature-one__icon">
-											<img src="images/synapse_real_time_analytics.png" style="height:60px" alt="">
-										</div>
-									</div>
-							</div>
-							</li>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- Feature One End -->
-        <!-- [START maps_add_map] -->
-<!-- Google Map One Start -->
-<section >
-			<div class="container">
-				<div class="section-title text-center">
-					<div class="section-title__tagline-box">
-						<h2 class="feature-one__title">Global <span>Fabric Community</span></h2><p>Joined Local Fabric Communities</p>
-	</div>
-				</div>
-	</div>
-	</section>
-		</div>
-    <style>
-        /* Set the size of the map */
-        #map {
-            height: 400px;
-            width: 100%;
-			border: 10px;
-			border-radius: 10px;
-        }
-
-    </style>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHI78Phaawxm-HPCYSXVvRdxyz0HpK1Jw"></script>
-   <script>
-        function initMap() {
-            // Map options with dark mode style
-            var options = {
-                zoom: 2.2,
-                center: {lat: 10.4, lng: 0.5},
-                styles: [
-                    { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
-                    { elementType: 'labels.text.stroke', stylers: [{ color: '#242f3e' }] },
-                    { elementType: 'labels.text.fill', stylers: [{ color: '#746855' }] },
-                    {
-                        featureType: 'administrative.locality',
-                        elementType: 'labels.text.fill',
-                        stylers: [{ color: '#d59563' }]
-                    },
-                    {
-                        featureType: 'poi',
-                        elementType: 'labels.text.fill',
-                        stylers: [{ color: '#d59563' }]
-                    },
-                    {
-                        featureType: 'poi.park',
-                        elementType: 'geometry',
-                        stylers: [{ color: '#263c3f' }]
-                    },
-                    {
-                        featureType: 'poi.park',
-                        elementType: 'labels.text.fill',
-                        stylers: [{ color: '#6b9a76' }]
-                    },
-                    {
-                        featureType: 'road',
-                        elementType: 'geometry',
-                        stylers: [{ color: '#38414e' }]
-                    },
-                    {
-                        featureType: 'road',
-                        elementType: 'geometry.stroke',
-                        stylers: [{ color: '#212a37' }]
-                    },
-                    {
-                        featureType: 'road',
-                        elementType: 'labels.text.fill',
-                        stylers: [{ color: '#9ca5b3' }]
-                    },
-                    {
-                        featureType: 'road.highway',
-                        elementType: 'geometry',
-                        stylers: [{ color: '#746855' }]
-                    },
-                    {
-                        featureType: 'road.highway',
-                        elementType: 'geometry.stroke',
-                        stylers: [{ color: '#1f2835' }]
-                    },
-                    {
-                        featureType: 'road.highway',
-                        elementType: 'labels.text.fill',
-                        stylers: [{ color: '#f3d19c' }]
-                    },
-                    {
-                        featureType: 'transit',
-                        elementType: 'geometry',
-                        stylers: [{ color: '#2f3948' }]
-                    },
-                    {
-                        featureType: 'transit.station',
-                        elementType: 'labels.text.fill',
-                        stylers: [{ color: '#d59563' }]
-                    },
-                    {
-                        featureType: 'water',
-                        elementType: 'geometry',
-                        stylers: [{ color: '#17263c' }]
-                    },
-                    {
-                        featureType: 'water',
-                        elementType: 'labels.text.fill',
-                        stylers: [{ color: '#515c6d' }]
-                    },
-                    {
-                        featureType: 'water',
-                        elementType: 'labels.text.stroke',
-                        stylers: [{ color: '#17263c' }]
-                    }
-					
-                ]
-            };
-
-            // New map
-            var map = new google.maps.Map(document.getElementById('map'), options);
-
-            // Function to add marker and infowindow with hyperlink
-            function addMarker(coords, title, info, url) {
-                var marker = new google.maps.Marker({
-                    position: coords,
-                    map: map,
-                    title: title,
-                    icon: {
-                        url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png" // Green marker
-                    }
-                });
-
-                var infowindow = new google.maps.InfoWindow({
-                    content: '<h5>' + title + '</h5><p style="color:black;">' + info + ' <a href="' + url + '" target="_blank"><b><u>Learn More</a></b></u></p>'
-                });
-
-                marker.addListener('click', function() {
-                    infowindow.open(map, marker);
-                });
-            }
-
- 
-            // Add markers with infowindows containing hyperlinks
-            addMarker(
-                {lat: 43.6532, lng: -79.3832},
-                'Toronto Fabric User Group',
-                'Toronto, Ontario, Canada',
-                'https://community.fabric.microsoft.com/t5/Toronto-Fabric-User-Group/gh-p/TorontoFabricUserGroup'
-            );
-            addMarker(
-                {lat: 29.7604, lng: -95.3698},
-                'Houston Fabric User Group',
-                'Houston, Texas, USA',
-                'https://community.fabric.microsoft.com/t5/Houston-Fabric-User-Group/gh-p/HoustonFabricUserGroup'
-            );
-			 addMarker(
-                {lat: 6.465422, lng: 3.406448},
-                'Microsoft Fabric Nigeria',
-                'Lagos, Nigeria',
-                'https://community.fabric.microsoft.com/t5/Microsoft-Fabric-Nigeria/gh-p/MicrosoftFabricNigeria'
-            );
-			 addMarker(
-                {lat: 30.033333, lng: 31.233334},
-                'Egypt Fabric User Group',
-                'Cairo, Egypt',
-                'https://community.fabric.microsoft.com/t5/Egypt-Fabric-User-Group/gh-p/EgyptFabricUserGroup'
-            );
-			 addMarker(
-                {lat: 51.049999, lng: -114.066666},
-                'Calgary Fabric User Group',
-                'Calgary, Canada',
-                'https://community.fabric.microsoft.com/t5/Calgary-Fabric-User-Group/gh-p/pbi_Calgary_usergroup'
-            );
-			 addMarker(
-                {lat: -36.848461, lng: 174.763336},
-                'Auckland Fabric and Power BI and Analytics',
-                'Auckland, New Zealand',
-                'https://www.meetup.com/new-zealand-business-intelligence-user-group'
-            );
-			 addMarker(
-                {lat: 51.5286416, lng: -0.1015987},
-                'Microsoft Fabric UK User Group',
-                'London, UK',
-                'https://www.meetup.com/microsoft-power-bi-uk'
-            );
-			 addMarker(
-                {lat:  45.508888, lng: -73.561668},
-                'Montreal MSDEVMTL',
-                'Montreal, Canada',
-                'https://www.meetup.com/msdevmtl'
-           
-			 );
-			 addMarker(
-                {lat:  45.334904, lng: -75.724098},
-                'Ottawa Fabric User Group',
-                'Ottawa, Canada',
-                'https://community.fabric.microsoft.com/t5/Ottawa-Fabric-User-Group/gh-p/OttawaFabricUserGroup'
-            );
-			addMarker(
-                {lat:  23.6850, lng: 90.3563},
-                'Bangladesh Fabric & Power BI User Group',
-                'Dhaka, Bangladesh',
-                'https://community.fabric.microsoft.com/t5/Bangladesh-Fabric-Power-BI-User/gh-p/PowerBICommunity-Bangladesh'
-            );
-			addMarker(
-                {lat:  17.3065, lng: 79.1772},
-                'India Microsoft Fabric User Group',
-                'Hyderabad, India',
-                'https://community.fabric.microsoft.com/t5/India-Microsoft-Fabric-User/gh-p/pbi_India_usergroup'
-            );
-			
-			addMarker(
-                {lat:  15.5974, lng: 32.5356},
-                'Sudan Microsoft Fabric User Group',
-                'Khartoum, Sudan',
-                'https://community.fabric.microsoft.com/t5/Sudan-Microsoft-Fabric-User/gh-p/SudanMicrosoftFabric'
-            );
-			
-			addMarker(
-                {lat:  49.2827, lng: -123.1207},
-                'Vancouver Fabric and Power BI User Group',
-                'Vancouver, Canada',
-                'https://community.fabric.microsoft.com/t5/Vancouver-Fabric-and-Power-BI/gh-p/PBI_VANCOUVER_USERGROUP'
-            );
-		
-				addMarker(
-                {lat:  -27.470125, lng: 153.0260},
-                'Queensland Power BI User Group',
-                'Queensland, Australia',
-                'https://community.fabric.microsoft.com/t5/Queensland-Power-BI-User-Group/gh-p/pbi_queensland_power_bi_user_group'
-            );
-				addMarker(
-                {lat:  13.0843, lng: 80.2705},
-                'Data Focused',
-                'Chennai, India',
-                'https://community.fabric.microsoft.com/t5/Data-Focused/gh-p/DataFocused'
-            );
-				addMarker(
-                {lat:  40.4093, lng: 49.8671},
-                'Azerbaijan Power BI Group',
-                'Baku, Azerbaijan',
-                'https://community.fabric.microsoft.com/t5/Azerbaijan-Power-BI-Group/gh-p/pbi_azerbaijan_usergroup'
-            );
-			addMarker(
-                {lat:  28.5384, lng: -81.3789},
-                'Orlando Power BI User Group',
-                'Orlando, USA',
-                'https://community.fabric.microsoft.com/t5/Orlando-Power-BI-User-Group/gh-p/pbi_Orlando_usergroup'
-            );
-			addMarker(
-                {lat:  40.4167, lng: -3.7033},
-                'Fabric User Group ESP',
-                'Madrid, Spain',
-                'https://community.fabric.microsoft.com/t5/Fabric-User-Group-ESP/gh-p/FabricUserGroupESP'
-            );
-			addMarker(
-                {lat:  41.0082, lng: 28.9784},
-                'Microsoft Fabric & Power BI Türkiye',
-                'Istanbul, Turkey',
-                'https://community.fabric.microsoft.com/t5/Microsoft-Fabric-Power-BI/gh-p/pbi_Turkey_usergroup'
-            );
-				addMarker(
-                {lat:  41.0082, lng: 28.9784},
-                'Microsoft Fabric & Power BI Türkiye',
-                'Istanbul, Turkey',
-                'https://community.fabric.microsoft.com/t5/Microsoft-Fabric-Power-BI/gh-p/pbi_Turkey_usergroup'
-            );
-			
-			addMarker(
-                {lat:  17.3065, lng: 78.1772},
-                'Hyderabad Data & AI Community',
-                'Hyderabad, India',
-                'https://www.linkedin.com/company/hyderabad-data-analytics-community/'
-            );
-			addMarker(
-                {lat:  28, lng: 77},
-                'India Microsoft Fabric User Group',
-                'Hyderabad, India',
-                'https://community.fabric.microsoft.com/t5/India-Microsoft-Fabric-User/gh-p/pbi_India_usergroup'
-            );
-			addMarker(
-                {lat:  13, lng: 77},
-                'India Microsoft Fabric User Group',
-                'Hyderabad, India',
-                'https://community.fabric.microsoft.com/t5/India-Microsoft-Fabric-User/gh-p/pbi_India_usergroup'
+						function GetMap() {
+							var key = 'Fjwf3GfAIJ6Vq1IB2CtUFdxGhTG9cETCKtxnceadho71k0YGU9b7JQQJ99BDACYeBjFcry5JAAAgAZMPgCKA'; // 🔁 Replace this!
 				
-            );
-			addMarker(
-                {lat:  28.5, lng: 77},
-                'Hyderabad Data & AI Community',
-                'Hyderabad, India',
-                'https://www.linkedin.com/company/hyderabad-data-analytics-community/'
-            );
-			addMarker(
-                {lat:  13, lng: 78},
-                'Hyderabad Data & AI Community',
-                'Hyderabad, India',
-                'https://www.linkedin.com/company/hyderabad-data-analytics-community/'
-            );
-				addMarker(
-                {lat:  14.5, lng: 120.9},
-                'Power BI Pilipinas',
-                'Manila, Philippines',
-                'https://community.fabric.microsoft.com/t5/Power-BI-Pilipinas/gh-p/pbi_philippines_usergroup'
-            );
-				addMarker(
-                {lat:  41.3874, lng: 2.16},
-                'Power BI & Fabric Barcelona',
-                'Barcelona, Spain',
-                'https://community.fabric.microsoft.com/t5/Power-BI-Fabric-Barcelona/gh-p/pbi_Barcelona_usergroup'
-            );
-				addMarker(
-                {lat:  -12.0467, lng: -77.04},
-                'Microsoft Fabric User Group Latam',
-                'Lima, Perú',
-                'https://community.fabric.microsoft.com/t5/Microsoft-Fabric-User-Group/gh-p/MicrosoftFabricUserGroupLatam'
-            );
-				addMarker(
-                {lat:   45.008888, lng: -73.561668},
-                'Montreal Modern Excel and Power BI',
-                'Montreal, Canada',
-                'https://community.fabric.microsoft.com/t5/Montreal-Modern-Excel-and-Power/gh-p/MontrealModernExcelandPowerBI'
-            );
+							map = new atlas.Map('myMap', {
+								center: [-37.5, 35], // Temporary center
+								zoom: 2,
+								view: 'Auto',
+								authOptions: {
+									authType: 'subscriptionKey',
+									subscriptionKey: key
+								}
+							});
+				
+							
+							map.events.add('ready', function () {
+								// Load CSV
+								Papa.parse("locations.csv", {
+									download: true,
+									header: true,
+									skipEmptyLines: true,
+									complete: function (results) {
+										const data = results.data;
+										const popup = new atlas.Popup({ pixelOffset: [0, -30] });
+										const bounds = [];
+
+										// Group items by lat+lon
+										const grouped = {};
+
+										data.forEach(loc => {
+											const lat = parseFloat(loc.lat);
+											const lon = parseFloat(loc.lon);
+
+											if (!isNaN(lat) && !isNaN(lon)) {
+												const key = `${lat},${lon}`;
+												if (!grouped[key]) {
+													grouped[key] = {
+														lat: lat,
+														lon: lon,
+														entries: []
+													};
+												}
+
+												grouped[key].entries.push({
+													title: loc.Name,
+													location: loc.Location,
+													link: loc.link
+												});
+											}
+										});
+
+										// Render one marker per grouped location
+										Object.values(grouped).forEach(group => {
+											const position = [group.lon, group.lat];
+											bounds.push(position);
+
+											const firstTitle = group.entries[0].title;
+
+											// Construct combined popup content
+											let content = `<div style="
+															font-family: 'Segoe UI', sans-serif;
+															padding: 12px;
+															font-size: 14px;
+															max-width: 280px;
+															min-width: 220px;
+															line-height: 1.5;
+															color: #333;
+														">`;
+
+											group.entries.forEach(entry => {
+												content += `
+													<div style="font-size: 15px; font-weight: 600; color: #1a1a1a;">${entry.title}</div>
+													<div style="margin-top: 4px;">${entry.location}</div>
+													<a href="${entry.link}" target="_blank" class="learn-more-link" style="display:inline-block; margin-top: 8px; font-size: 13px; color: #0066cc; text-decoration: none;">
+														Learn more →
+													</a>
+													<hr style="margin: 12px 0; border: 0; border-top: 1px solid #eee;">
+												`;
+											});
+
+											content += `</div>`;
+
+											const marker = new atlas.HtmlMarker({
+												position: position,
+												text: firstTitle.charAt(0),
+												color: 'DodgerBlue',
+												title: firstTitle
+											});
+
+											map.markers.add(marker);
+
+											map.events.add('click', marker, function () {
+												popup.setOptions({
+													position: position,
+													content: content
+												});
+												popup.open(map);
+											});
+										});
+
+										// Fit map to bounds
+										if (bounds.length > 0) {
+											const bbox = atlas.data.BoundingBox.fromPositions(bounds);
+											map.setCamera({
+												bounds: bbox,
+												padding: 80
+											});
+										}
+									}
+								});
+							});
         }
     </script>
-		  </div>
-</section>
-
-<body onload="initMap()">
-    <div id="map"></div>
-</body>
-<div class="feature-one__btn-box">
+				<div id="myMap" style="width: 100%; height: 500px;"></div>
+			</section>
+			<div class="feature-one__btn-box">
 					
-						  <h1>&nbsp;</h1>
+				<h1>&nbsp;</h1>
 </div>
+			<!-- Azure Map End -->
 
-		<!-- Google Map One End -->
-	
-<div class="container">
+			<div class="container">
 				<div class="section-title text-center">
 					<div class="section-title__tagline-box">
 						<h2 class="feature-one__title">Key Features of <span>Microsoft Fabric</span></h2>
 					</div>
-					
-                </div>
+
+				</div>
 
 				<div class="solutions-one__carousel owl-carousel owl-theme thm-owl__carousel" data-owl-options='{
 					"loop": true,
@@ -652,48 +494,34 @@
 					<div class="item">
 						<div class="solutions-one__single">
 							<div class="solutions-one__icon">
-								<img src="images/data_factory.png" style="height:60px" alt="">
-							</div>
-							<h4 class="solutions-one__title"><a href="https://learn.microsoft.com/en-us/fabric/data-factory/" target="_blank">Data Factory</a></h4>
-							<p class="solutions-one__text"><span>Azure Data Factory combines the simplicity of Power Query with the scale and power of Azure Data Factory making it easier for to connect to data sources.</span>
-							</p>
-							<a href="https://learn.microsoft.com/en-us/fabric/data-factory/" target="_blank" class="solutions-one__btn">Explore More <i
-									class="fas fa-arrow-right"></i> </a>
-						</div>
-					</div>
-					<div class="item">
-						<div class="solutions-one__single">
-							<div class="solutions-one__icon">
-								<img src="images/Data-Activator.png" style="height:60px" alt="">
-							</div>
-							<h4 class="solutions-one__title"><a href="https://learn.microsoft.com/en-us/fabric/data-activator/" target="_blank">Data Activator</a></h4>
-							<p class="solutions-one__text"><span>Data Activator is a no-code experience in Microsoft Fabric for automatically taking actions when patterns or conditions are detected in changing data.</span>
-							</p>
-							<a href="https://learn.microsoft.com/en-us/fabric/data-activator/" target="_blank" class="solutions-one__btn">Explore More <i
-									class="fas fa-arrow-right"></i> </a>
-						</div>
-					</div>
-					<div class="item">
-						<div class="solutions-one__single">
-							<div class="solutions-one__icon">
-								<img src="images/onelake.png" style="height:60px" alt="">
-							</div>
-							<h4 class="solutions-one__title"><a href="https://learn.microsoft.com/en-us/fabric/onelake/" target="_blank">Onelake</a></h4>
-							<p class="solutions-one__text"><span>Onelake is built into the Fabric service and provides a unified location to store all organizational data where the experiences operate.</span>
-							</p>
-							<a href="https://learn.microsoft.com/en-us/fabric/onelake/" target="_blank" class="solutions-one__btn">Explore More <i
-									class="fas fa-arrow-right"></i> </a>
-						</div>
-					</div>
-					<div class="item">
-						<div class="solutions-one__single">
-							<div class="solutions-one__icon">
 								<img src="images/power_bi.png" style="height:60px" alt="">
 							</div>
-							<h4 class="solutions-one__title"><a href="https://learn.microsoft.com/en-us/power-bi/" target="_blank">Power BI</a></h4>
-							<p class="solutions-one__text"><span>Power BI is the world's leading Business Intelligence platform. It ensures that business owners can access all the data in Fabric quickly and intuitively.</span>
+							<h4 class="solutions-one__title"><a
+									href="https://learn.microsoft.com/en-us/power-bi/fundamentals/power-bi-overview/"
+									target="_blank">Power BI</a></h4>
+							<p class="solutions-one__text"><span>Power BI is a collection of software services, apps,
+									and connectors that work together to turn your unrelated sources of data into
+									coherent, visually immersive, and interactive insights. </span>
 							</p>
-							<a href="https://learn.microsoft.com/en-us/power-bi/" target="_blank" class="solutions-one__btn">Explore More <i
+							<a href="https://learn.microsoft.com/en-us/power-bi/" target="_blank"
+								class="solutions-one__btn">Explore More <i class="fas fa-arrow-right"></i> </a>
+						</div>
+					</div>
+					<div class="item">
+						<div class="solutions-one__single">
+							<div class="solutions-one__icon">
+								<img src="images/data_factory.png" style="height:60px" alt="">
+							</div>
+							<h4 class="solutions-one__title"><a
+									href="https://learn.microsoft.com/en-us/fabric/data-factory/data-factory-overview/"
+									target="_blank">Data Factory</a></h4>
+							<p class="solutions-one__text"><span>Data Factory empowers you with a modern data
+									integration experience to ingest, prepare and transform data from a rich set of data
+									sources (for example, databases, data warehouse, Lakehouse, real-time data, and
+									more).</span>
+							</p>
+							<a href="https://learn.microsoft.com/en-us/fabric/data-factory/data-factory-overview/"
+								target="_blank" class="solutions-one__btn">Explore More <i
 									class="fas fa-arrow-right"></i> </a>
 						</div>
 					</div>
@@ -702,154 +530,203 @@
 							<div class="solutions-one__icon">
 								<img src="images/synapse_data_engineering.png" style="height:60px" alt="">
 							</div>
-							<h4 class="solutions-one__title"><a href="https://learn.microsoft.com/en-us/fabric/data-engineering/" target="_blank">Data Engineering</a></h4>
-							<p class="solutions-one__text"><span>Data Engineering experience provides a world class Spark platform with great authoring experiences, enabling more options data engineers.</span>
+							<h4 class="solutions-one__title"><a
+									href="https://learn.microsoft.com/en-us/fabric/data-engineering/data-engineering-overview/"
+									target="_blank">Data Engineering</a></h4>
+							<p class="solutions-one__text"><span>Data engineering in Microsoft Fabric enables users to
+									design, build, and maintain infrastructures and systems that enable their
+									organizations to collect, store, process, and analyze large volumes of data. </span>
 							</p>
-							<a href="https://learn.microsoft.com/en-us/fabric/data-engineering/" target="_blank" class="solutions-one__btn">Explore More <i
+							<a href="https://learn.microsoft.com/en-us/fabric/data-engineering/data-engineering-overview/"
+								target="_blank" class="solutions-one__btn">Explore More <i
 									class="fas fa-arrow-right"></i> </a>
 						</div>
 					</div>
 					<div class="item">
 						<div class="solutions-one__single">
 							<div class="solutions-one__icon">
-								<img src="images/synapse_data_science.png" style="height:60px" alt="">
+								<img src="images/data-warehouse-icon.svg" style="height:60px" alt="">
 							</div>
-							<h4 class="solutions-one__title"><a href="https://learn.microsoft.com/en-us/fabric/data-science/" target="_blank">Data Science</a></h4>
-							<p class="solutions-one__text"><span>Data Science experience enables you to build, deploy, and operationalize machine learning models seamlessly within your Fabric experience.</span>
+							<h4 class="solutions-one__title"><a
+									href="https://learn.microsoft.com/en-us/fabric/data-warehouse/data-warehousing/"
+									target="_blank">Data Warehouse</a></h4>
+							<p class="solutions-one__text"><span>Fabric Data Warehouse is a next-generation data
+									warehousing solution within Microsoft Fabric. The lake-centric warehouse is built on
+									an enterprise grade distributed processing engine. </span>
 							</p>
-							<a href="https://learn.microsoft.com/en-us/fabric/data-science/" target="_blank" class="solutions-one__btn">Explore More <i
+							<a href="https://learn.microsoft.com/en-us/fabric/data-warehouse/data-warehousing/"
+								target="_blank" class="solutions-one__btn">Explore More <i
 									class="fas fa-arrow-right"></i> </a>
 						</div>
-						
+					</div>
+
+					<div class="item">
+						<div class="solutions-one__single">
+							<div class="solutions-one__icon">
+								<img src="images/real-time-intelligence-icon.svg" style="height:60px" alt="">
+							</div>
+							<h4 class="solutions-one__title"><a
+									href="https://learn.microsoft.com/en-us/fabric/real-time-intelligence/"
+									target="_blank">Real-Time Intelligence</a></h4>
+							<p class="solutions-one__text"><span>Real-Time Intelligence is a powerful service that
+									empowers everyone in your organization to extract insights and visualize their data
+									in motion. </span>
+							</p>
+							<a href="https://learn.microsoft.com/en-us/fabric/real-time-intelligence/" target="_blank"
+								class="solutions-one__btn">Explore More <i class="fas fa-arrow-right"></i> </a>
+						</div>
+
+					</div>
+					<div class="item">
+						<div class="solutions-one__single">
+							<div class="solutions-one__icon">
+								<img src="images/synapse_data_science.png" style="height:60px" alt="">
+							</div>
+							<h4 class="solutions-one__title"><a
+									href="https://learn.microsoft.com/en-us/fabric/data-science/data-science-overview/"
+									target="_blank">Data Science</a></h4>
+							<p class="solutions-one__text"><span>Microsoft Fabric offers Data Science experiences to
+									empower users to complete end-to-end data science workflows for the purpose of data
+									enrichment and business insights. </span>
+							</p>
+							<a href="https://learn.microsoft.com/en-us/fabric/data-science/data-science-overview/"
+								target="_blank" class="solutions-one__btn">Explore More <i
+									class="fas fa-arrow-right"></i> </a>
+						</div>
 					</div>
 				</div>
-</div>
-		</section>
-		<!-- Solutions One End -->
+			</div>
+			</section>
+			<!-- Solutions One End -->
 
-		<!-- Main Footer Start -->
-		<footer class="main-footer">
-			<div class="main-footer__shape-1 img-bounce"></div>
-			<div class="main-footer__top">
-				<div class="container">
-					<div class="row">
-						<div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="100ms">
-							<div class="footer-widget__column footer-widget__about">
-								<div class="footer-widget__logo">
-									<a href="index.html"><img src="images/GFC.svg" style="height:50px;" alt=""></a>
-								</div>
-								<p class="footer-widget__about-text">Our mission is to connect Fabric communities across the world to share ideas and content with each other. </p>
-							</div>
-						</div>
-						<div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
-							<div class="footer-widget__column footer-widget__company">
-								<div class="footer-widget__title-box">
-									<h3 class="footer-widget__title">Community</h3>
-								</div>
-								<div class="footer-widget__company-list-box">
-									<ul class="footer-widget__company-list">
-										<li><a href="https://forms.office.com/r/XsVPrep2w4" target="_blank">Join Today</a></li>
-										<li><a href="https://community.fabric.microsoft.com" target="_blank">MS Fabric Community</a></li>
-									</ul>
+			<!-- Main Footer Start -->
+			<footer class="main-footer">
+				<div class="main-footer__shape-1 img-bounce"></div>
+				<div class="main-footer__top">
+					<div class="container">
+						<div class="row">
+							<div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="100ms">
+								<div class="footer-widget__column footer-widget__about">
+									<div class="footer-widget__logo">
+										<a href="index.html"><img src="images/GFC.svg" style="height:50px;" alt=""></a>
+									</div>
+									<p class="footer-widget__about-text">Our mission is to connect Fabric communities
+										across the world to share ideas and content with each other. </p>
 								</div>
 							</div>
-						</div>
-						<div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
-							<div class="footer-widget__column footer-widget__resources">
-								<div class="footer-widget__title-box">
-									<h3 class="footer-widget__title">Resources</h3>
-								</div>
-								<div class="footer-widget__resources-list-box">
-									<ul class="footer-widget__resources-list">
-										<li><a href="https://www.microsoft.com/en-us/microsoft-fabric" target="_blank">Microsoft Fabric</a></li>
-				
-									</ul>
+							<div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
+								<div class="footer-widget__column footer-widget__company">
+									<div class="footer-widget__title-box">
+										<h3 class="footer-widget__title">Community</h3>
+									</div>
+									<div class="footer-widget__company-list-box">
+										<ul class="footer-widget__company-list">
+											<li><a href="https://forms.office.com/r/XsVPrep2w4" target="_blank">Join
+													Today</a></li>
+											<li><a href="https://community.fabric.microsoft.com" target="_blank">MS
+													Fabric Community</a></li>
+										</ul>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="400ms">
-							<div class="footer-widget__column footer-widget__newsletter">
-								<div class="footer-widget__title-box">
-									<h3 class="footer-widget__title">Get in Touch</h3>
-							  </div>
+							<div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
+								<div class="footer-widget__column footer-widget__resources">
+									<div class="footer-widget__title-box">
+										<h3 class="footer-widget__title">Resources</h3>
+									</div>
 									<div class="footer-widget__resources-list-box">
-									<ul class="footer-widget__resources-list">
-										<li><a href="mailto:Admin<Admin@GlobalFabric.Community>" target="_blank">Admin@GlobalFabric.Community</a></li>
-				
-									</ul>
+										<ul class="footer-widget__resources-list">
+											<li><a href="https://www.microsoft.com/en-us/microsoft-fabric"
+													target="_blank">Microsoft Fabric</a></li>
+
+										</ul>
+									</div>
 								</div>
-								<div class="site-footer__social">
-			
+							</div>
+							<div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="400ms">
+								<div class="footer-widget__column footer-widget__newsletter">
+									<div class="footer-widget__title-box">
+										<h3 class="footer-widget__title">Get in Touch</h3>
+									</div>
+									<div class="footer-widget__resources-list-box">
+										<ul class="footer-widget__resources-list">
+											<li><a href="mailto:Admin<Admin@GlobalFabric.Community>"
+													target="_blank">Admin@GlobalFabric.Community</a></li>
+
+										</ul>
+									</div>
+									<div class="site-footer__social">
+
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="main-footer__bottom">
-				<div class="container">
-					<div class="main-footer__bottom-inner">
-						<p class="main-footer__bottom-text">Copyright © 2024. All Rights Reserved.</p>
+				<div class="main-footer__bottom">
+					<div class="container">
+						<div class="main-footer__bottom-inner">
+							<p class="main-footer__bottom-text">Copyright © <script>document.write(new Date().getFullYear());</script>. All Rights Reserved.</p>
+						</div>
 					</div>
 				</div>
+			</footer>
+			<!-- Main Footer End -->
+
+
+
+
+
+
+
+
+			<!-- Search Popup -->
+			<div class="search-popup">
+				<div class="color-layer"></div>
+				<button class="close-search"><span class="far fa-times fa-fw"></span></button>
+				<form method="post" action="blog.html">
+					<div class="form-group">
+						<input type="search" name="search-field" value="" placeholder="Search Here" required="">
+						<button type="submit"><i class="far fa-search fa-fw"></i></button>
+					</div>
+				</form>
 			</div>
-		</footer>
-		<!-- Main Footer End -->
+			<!-- End Search Popup -->
 
-
-
-
-
-
-		
-
-		<!-- Search Popup -->
-		<div class="search-popup">
-			<div class="color-layer"></div>
-			<button class="close-search"><span class="far fa-times fa-fw"></span></button>
-			<form method="post" action="blog.html">
-				<div class="form-group">
-					<input type="search" name="search-field" value="" placeholder="Search Here" required="">
-					<button type="submit"><i class="far fa-search fa-fw"></i></button>
-				</div>
-			</form>
 		</div>
-		<!-- End Search Popup -->
+		<!-- End PageWrapper -->
 
-	</div>
-	<!-- End PageWrapper -->
+		<!-- Scroll To Top -->
+		<div class="scroll-to-top scroll-to-target" data-target="html"><span class="fas fa-arrow-up fa-fw"></span></div>
 
-	<!-- Scroll To Top -->
-	<div class="scroll-to-top scroll-to-target" data-target="html"><span class="fas fa-arrow-up fa-fw"></span></div>
-
-<script src="js/jquery.js"></script>
-<script src="js/01-bootstrap.min.js"></script>
-<script src="js/02-bootstrap-select.min.js"></script>
-<script src="js/03-color-settings.js"></script>
-<script src="js/04-owl.js"></script>
-<script src="js/05-jarallax.min.js"></script>
-<script src="js/06-isotope.js"></script>
-<script src="js/07-wow.js"></script>
-<script src="js/08-validate.js"></script>
-<script src="js/09-appear.js"></script>
-<script src="js/10-swiper.min.js"></script>
-<script src="js/11-jquery.easing.min.js"></script>
-<script src="js/12-gsap.min.js"></script>
-<script src="js/13-odometer.js"></script>
-<script src="js/14-tilt.jquery.min.js"></script>
-<script src="js/15-magnific-popup.min.js"></script>
-<script src="js/16-jquery-ui.js"></script>
-<script src="js/17-marquee.min.js"></script>
-<script src="js/18-jquery.circleType.js"></script>
-<script src="js/19-jquery.lettering.min.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/01-bootstrap.min.js"></script>
+		<script src="js/02-bootstrap-select.min.js"></script>
+		<script src="js/03-color-settings.js"></script>
+		<script src="js/04-owl.js"></script>
+		<script src="js/05-jarallax.min.js"></script>
+		<script src="js/06-isotope.js"></script>
+		<script src="js/07-wow.js"></script>
+		<script src="js/08-validate.js"></script>
+		<script src="js/09-appear.js"></script>
+		<script src="js/10-swiper.min.js"></script>
+		<script src="js/11-jquery.easing.min.js"></script>
+		<script src="js/12-gsap.min.js"></script>
+		<script src="js/13-odometer.js"></script>
+		<script src="js/14-tilt.jquery.min.js"></script>
+		<script src="js/15-magnific-popup.min.js"></script>
+		<script src="js/16-jquery-ui.js"></script>
+		<script src="js/17-marquee.min.js"></script>
+		<script src="js/18-jquery.circleType.js"></script>
+		<script src="js/19-jquery.lettering.min.js"></script>
 
 
 
-<script src="js/script.js"></script>
+		<script src="js/script.js"></script>
 
 
-	<!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
-	<!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+		<!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+		<!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
 
 </body>
 
