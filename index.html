@@ -472,15 +472,12 @@
 											
 										});
 										
+										map.setCamera({
+											center: [20, 10],		// Map Centring
+											zoom: 1.3
+										});
 
-										// Fit map to bounds
-										if (bounds.length > 0) {
-											const bbox = atlas.data.BoundingBox.fromPositions(bounds);
-											map.setCamera({
-												bounds: bbox,
-												padding: 80
-											});
-										}
+
 									}
 								});
 							});
