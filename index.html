@@ -335,6 +335,7 @@
 							border: 10px;
 							border-radius: 10px;
 						}
+
 					</style>
 					<script>
 						var map;
@@ -345,13 +346,14 @@
 							map = new atlas.Map('myMap', {
 								center: [-37.5, 35], // Temporary center
 								zoom: 2,
+								style: "dark",
 								view: 'Auto',
 								authOptions: {
 									authType: 'subscriptionKey',
 									subscriptionKey: key
 								}
 							});
-				
+							
 							
 							map.events.add('ready', function () {
 								// Load CSV
@@ -395,6 +397,10 @@
 											bounds.push(position);
 
 											const firstTitle = group.entries[0].title;
+											const cityName = group.entries[0].location;
+											const cityInitial = cityName ? cityName.trim().charAt(0).toUpperCase() : '';
+
+
 
 											// Construct combined popup content
 											let content = `<div style="
@@ -407,22 +413,49 @@
 															color: #333;
 														">`;
 
-											group.entries.forEach(entry => {
-												content += `
-													<div style="font-size: 15px; font-weight: 600; color: #1a1a1a;">${entry.title}</div>
-													<div style="margin-top: 4px;">${entry.location}</div>
-													<a href="${entry.link}" target="_blank" class="learn-more-link" style="display:inline-block; margin-top: 8px; font-size: 13px; color: #0066cc; text-decoration: none;">
-														Learn more →
-													</a>
-													<hr style="margin: 12px 0; border: 0; border-top: 1px solid #eee;">
-												`;
-											});
+														let cityDisplayed = false;
 
-											content += `</div>`;
+														group.entries.forEach(entry => {
+															if (!cityDisplayed) {
+																content += `
+																	<div style="
+																		font-weight: 700;
+																		text-align: center;
+																		font-size: 16px;
+																		margin-bottom: 10px;
+																		color: #1a1a1a;
+																		border-bottom: 1px solid #ddd;
+																		padding-bottom: 6px;
+																	">
+																		${entry.location}
+																	</div>`;
+																cityDisplayed = true;
+															}
+
+															content += `
+																<div style="margin: 8px 0; display: flex; align-items: center;">
+																	<span style="margin-right: 6px; font-size: 10px; color: #0066cc;">■</span>
+																	<a href="${entry.link}" target="_blank"
+																		style="
+																			font-size: 13.5px;
+																			font-weight: 500;
+																			color: #0066cc;
+																			text-decoration: none;
+																			transition: color 0.2s ease;
+																		"
+																		onmouseover="this.style.color='#003366';"
+																		onmouseout="this.style.color='#0066cc';">
+																		${entry.title}
+																	</a>
+																</div>
+															`;
+														});
+
+
 
 											const marker = new atlas.HtmlMarker({
 												position: position,
-												text: firstTitle.charAt(0),
+												text: cityInitial,
 												color: 'DodgerBlue',
 												title: firstTitle
 											});
@@ -432,11 +465,13 @@
 											map.events.add('click', marker, function () {
 												popup.setOptions({
 													position: position,
-													content: content
+													content: content + '</div>' // closing the outer div
 												});
 												popup.open(map);
 											});
+											
 										});
+										
 
 										// Fit map to bounds
 										if (bounds.length > 0) {
